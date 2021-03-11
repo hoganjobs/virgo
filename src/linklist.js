@@ -164,4 +164,6 @@ function Linklist() {
 var link = new Linklist();
 link.append(1);
 link.append(2);
+link.insert(2, 3);
+link.remove(1);
 link.print();
