@@ -39,3 +39,7 @@ this.init_tree = function(string){
       }
   }
 };
+
+this.get_root = function(){
+  return root;
+};
