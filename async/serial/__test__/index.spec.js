@@ -22,3 +22,9 @@ test('Async/Await', done => {
   asynsAwait()
   setTimeout(done, 1000);
 })
+
+test('Event', done => {
+  const {event} = require('../index')
+  event()
+  setTimeout(done, 1000);
+})

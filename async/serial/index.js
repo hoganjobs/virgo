@@ -15,7 +15,7 @@ const promise = (name, delay = 100) =>
   new Promise((resolve) => {
     setTimeout(() => {
       logTime(name);
-      resolve()
+      resolve();
     }, delay);
   });
 
@@ -55,4 +55,20 @@ exports.asynsAwait = async () => {
   await promise("Async/Await 1");
   await promise("Async/Await 2");
   await promise("Async/Await 3");
+};
+
+exports.event = async () => {
+  const asyncFun = (name) => (event) => {
+    setTimeout(() => {
+      logTime(name);
+      event.emit("end");
+    }, 100);
+    return event;
+  };
+  const ary = [asyncFun("event 1"), asyncFun("event 2"), asyncFun("event 3")];
+  const { EventEmitter } = require("events");
+  const event = new EventEmitter();
+  let i = 0;
+  event.on("end", () => i < ary.length && ary[i++](event));
+  event.emit("end");
 };
