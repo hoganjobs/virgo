@@ -1,6 +1,3 @@
-# Getting Started with Create Data structrue and algorithm
+# Getting Started with Nodejs
 
-## contain
-- stack
-- queue
-- linklist
+## nodejs
