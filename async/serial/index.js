@@ -11,15 +11,32 @@ exports.callback = () => {
   }, 100);
 };
 
-const promise = (name, delay = 100) => new Promise(resolve => {
-  setTimeout(() => {
-    logTime(name);
-  }, delay);
-})
+const promise = (name, delay = 100) =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      logTime(name);
+    }, delay);
+  });
 
 exports.promise = () => {
-  promise('Promise 1')
-      .then(promise('Promise 2'))
-      .then(promise('Promise 3'))
-}
+  promise("Promise 1").then(promise("Promise 2")).then(promise("Promise 3"));
+};
 
+exports.generator = () => {
+  const generator = function* (name) {
+    yield promise(name + 1);
+    yield promise(name + 2);
+    yield promise(name + 3);
+  };
+
+  let co = (generator) => {
+    if ((it = generator.next().value)) {
+      it.then((res) => {
+        co(generator);
+      });
+    } else {
+      return;
+    }
+  };
+  co(generator('Co-Generator'))
+};

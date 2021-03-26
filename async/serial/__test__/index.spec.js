@@ -10,3 +10,9 @@ test('promise', done => {
   promise()
   setTimeout(done, 1000);
 })
+
+test('generator', done => {
+  const {generator} = require('../index')
+  generator()
+  setTimeout(done, 1000);
+})
