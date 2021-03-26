@@ -16,3 +16,9 @@ test('generator', done => {
   generator()
   setTimeout(done, 1000);
 })
+
+test('Async/Await', done => {
+  const {asynsAwait} = require('../index')
+  asynsAwait()
+  setTimeout(done, 1000);
+})

@@ -15,6 +15,7 @@ const promise = (name, delay = 100) =>
   new Promise((resolve) => {
     setTimeout(() => {
       logTime(name);
+      resolve()
     }, delay);
   });
 
@@ -22,11 +23,20 @@ exports.promise = () => {
   promise("Promise 1").then(promise("Promise 2")).then(promise("Promise 3"));
 };
 
+let co = function (gen, name) {
+  var it = gen(name);
+  var ret = it.next();
+  ret.value.then(function (res) {
+    it.next(res);
+  });
+};
+
 exports.generator = () => {
   const generator = function* (name) {
     yield promise(name + 1);
     yield promise(name + 2);
     yield promise(name + 3);
+    yield promise(name + 4);
   };
 
   let co = (generator) => {
@@ -38,5 +48,11 @@ exports.generator = () => {
       return;
     }
   };
-  co(generator('Co-Generator'))
+  co(generator("Co-Generator"));
+};
+
+exports.asynsAwait = async () => {
+  await promise("Async/Await 1");
+  await promise("Async/Await 2");
+  await promise("Async/Await 3");
 };
