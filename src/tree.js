@@ -53,3 +53,5 @@ this.in_order = function (node) {
   console.log(node.data);
   this.in_order(node.rightChild);
 };
+
+// 
