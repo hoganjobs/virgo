@@ -11,4 +11,9 @@ program
     // })
     .action(require('../lib/init'))
 
+program
+    .command('refresh')
+    .description('refresh')
+    .action(require('../lib/refresh'))
+
 program.parse(process.argv)
