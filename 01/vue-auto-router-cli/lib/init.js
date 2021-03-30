@@ -4,6 +4,7 @@ const clear = require("clear");
 const chalk = require("chalk");
 const log = (content) => console.log(chalk.green(content));
 const { clone } = require("./download");
+const open = require("open");
 
 module.exports = async (name) => {
   // 打印欢迎界面
@@ -12,12 +13,14 @@ module.exports = async (name) => {
   log(data);
 
   // 克隆项目
-  await clone("github:hoganjobs/hogan", name);
+  await clone("github:su37josephxia/vue-template", name);
 
   // ....
   log("安装依赖");
   // await spawn("cnpm", ["install"], { cwd: `./${name}` });
-  await spawn(process.platform === "win32" ? "npm.cmd" : "npm",['install'],{cwd:`./${name}`});
+  await spawn(process.platform === "win32" ? "npm.cmd" : "npm", ["install"], {
+    cwd: `./${name}`,
+  });
   log(
     chalk.green(
       ` 
@@ -30,6 +33,12 @@ module.exports = async (name) => {
       `
     )
   );
+
+  // 打开浏览器
+  open(`http://localhost:8080`);
+  await spawn(process.platform === "win32" ? "npm.cmd" : "npm", ["run", "serve"], {
+    cwd: `./${name}`,
+  });
 };
 
 const spawn = async (...args) => {
