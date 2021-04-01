@@ -11,6 +11,7 @@ http
       });
     } else if (method == "GET" && url == "/api/users") {
       res.setHeader("Content-Type", "application/json");
+      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
       res.end(JSON.stringify([{ name: "tom", age: 20 }]));
     }
   })

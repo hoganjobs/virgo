@@ -13,13 +13,14 @@
 </html> -->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-    // (async () => {
-    //     const res = await axios.get('/api/users')
-    //     console.log('res', res.data)
-    //     document.writeln(`Response: ${JSON.stringify(res.data)}`)
-    // })()
+    (async () => {
+        axios.defaults.baseURL = 'http://localhost:4000'
+        const res = await axios.get('/api/users', {headers: {'X-Token': 'jilei'}})
+        console.log('res', res.data)
+        document.writeln(`Response: ${JSON.stringify(res.data)}`)
+    })()
 
     // 埋点
-    const img = new Image()
-    img.src = '/api/users?button= 123'
+    // const img = new Image()
+    // img.src = '/api/users?button= 123'
 </script>
