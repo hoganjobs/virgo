@@ -3,6 +3,7 @@ const fs = require("fs");
 http
   .createServer((req, res) => {
     const { method, url } = req;
+    console.log('url: ', url, ' method: ', method)
     if (method == "GET" && url == "/") {
       fs.readFile("./index.html", (err, data) => {
         res.setHeader("Content-Type", "text/html");
