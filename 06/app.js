@@ -17,7 +17,7 @@ app.use(session(SESS_CONFIG, app))
 
 // 测试
 app.use(ctx => {
-  if (ctx.path === '/favicon') return
+  if (ctx.path === '/favicon.ico') return
   // 获取
   let n = ctx.session.count || 0
   
