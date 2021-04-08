@@ -1,10 +1,11 @@
 const koa = require('koa')
-const {initRouter} = require('./kkb-loader')
+const {initRouter, initController} = require('./kkb-loader')
 
 class kkb {
   constructor (conf) {
     this.$app = new koa(conf)
-    this.$router = initRouter()
+    this.$ctrl = initController()
+    this.$router = initRouter(this)
     this.$app.use(this.$router.routes())
   }
 
