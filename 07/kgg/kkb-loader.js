@@ -64,4 +64,29 @@ function initService() {
   return services;
 }
 
-module.exports = { initRouter, initController, initService };
+const Sequelize = require('sequelize')
+function loadConfig(app) {
+  load("config", (filename, conf) => {
+    if (conf.db) {
+      app.$db = new Sequelize(conf.db)
+
+      // 加载模型
+      app.$model = {}
+      load('model', (filename, {schema, options}) => {
+        app.$model[filename] = app.$db.define(filename, schema, options)
+      })
+      app.$db.sync()
+    }
+
+    if(conf.middleware) {
+      conf.middleware.forEach(mid => {
+        const midPath = path.resolve(__dirname, 'middleware', mid)
+        app.$app.use(require(midPath))
+      })
+    }
+  });
+}
+
+
+
+module.exports = { initRouter, initController, initService, loadConfig };
