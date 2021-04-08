@@ -36,12 +36,12 @@ function initRouter(app) {
       );
 
       // router[method](prefix + path, routes[key]);
-      router[method](prefix + path, async ctx =>{
+      router[method](prefix + path, async (ctx) => {
         // 挂载上下文到app
-        app.ctx = ctx
+        app.ctx = ctx;
         // 路由处理接收app
-        await routes[key](app)
-      })
+        await routes[key](app);
+      });
     });
   });
   return router;
@@ -64,37 +64,40 @@ function initService() {
   return services;
 }
 
-const Sequelize = require('sequelize')
+const Sequelize = require("sequelize");
 function loadConfig(app) {
   load("config", (filename, conf) => {
     if (conf.db) {
-      app.$db = new Sequelize(conf.db)
+      app.$db = new Sequelize(conf.db);
 
       // 加载模型
-      app.$model = {}
-      load('model', (filename, {schema, options}) => {
-        app.$model[filename] = app.$db.define(filename, schema, options)
-      })
-      app.$db.sync()
+      app.$model = {};
+      load("model", (filename, { schema, options }) => {
+        app.$model[filename] = app.$db.define(filename, schema, options);
+      });
+      app.$db.sync();
     }
 
-    if(conf.middleware) {
-      conf.middleware.forEach(mid => {
-        const midPath = path.resolve(__dirname, 'middleware', mid)
-        app.$app.use(require(midPath))
-      })
+    if (conf.middleware) {
+      conf.middleware.forEach((mid) => {
+        const midPath = path.resolve(__dirname, "middleware", mid);
+        app.$app.use(require(midPath));
+      });
     }
   });
 }
 
-
-const schedule = require('node-schedule')
+const schedule = require("node-schedule");
 function initSchedule() {
-  load('schedule', (filename, scheduleConfig) => {
-    schedule.scheduleJob(scheduleConfig.interval, scheduleConfig.handler)
-  })
+  load("schedule", (filename, scheduleConfig) => {
+    schedule.scheduleJob(scheduleConfig.interval, scheduleConfig.handler);
+  });
 }
 
-
-
-module.exports = { initRouter, initController, initService, loadConfig, initSchedule };
+module.exports = {
+  initRouter,
+  initController,
+  initService,
+  loadConfig,
+  initSchedule,
+};

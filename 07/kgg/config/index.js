@@ -6,7 +6,5 @@ module.exports = {
     username: "kaikeba_admin",
     password: "admin",
   },
-  middleware: ['logger'] 
+  middleware: ["logger"],
 };
-
-
