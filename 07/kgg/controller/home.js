@@ -1,8 +1,10 @@
-module.exports = {
+module.exports = app => ({
   index: async ctx => {
-    ctx.body = "首页Ctrl"
+    // ctx.body = "首页Ctrl"
+    const name = await app.$service.user.getName()
+    app.ctx.body = 'ctrl user ' + name
   },
   detail: async ctx => {
     ctx.body = '详情页面Ctrl'
   }
-}
+})

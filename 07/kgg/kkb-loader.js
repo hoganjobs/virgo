@@ -35,19 +35,33 @@ function initRouter(app) {
         `正在映射地址： ${method.toLocaleLowerCase()} ${prefix}${path}`
       );
 
-      router[method](prefix + path, routes[key]);
+      // router[method](prefix + path, routes[key]);
+      router[method](prefix + path, async ctx =>{
+        // 挂载上下文到app
+        app.ctx = ctx
+        // 路由处理接收app
+        await routes[key](app)
+      })
     });
   });
   return router;
 }
 
-function initController() {
+function initController(app) {
   const controllers = {};
   // 读取ctrl
   load("controller", (filename, controller) => {
-    controllers[filename] = controller;
+    controllers[filename] = controller(app);
   });
   return controllers;
 }
 
-module.exports = { initRouter, initController };
+function initService() {
+  const services = {};
+  load("service", (filename, service) => {
+    services[filename] = service;
+  });
+  return services;
+}
+
+module.exports = { initRouter, initController, initService };
