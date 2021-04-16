@@ -53,8 +53,8 @@ class UserController extends Controller {
 
   /**
    * @summary 修改用户
-   * @description 获取用户信息
-   * @router put /api/user/
+   * @description 修改用户
+   * @router put /api/user/{id}
    * @response 200 baseResponse 创建成功
    * @ignore
    */
@@ -73,7 +73,7 @@ class UserController extends Controller {
 
   /**
    * @summary 获取单个用户
-   * @description 获取用户信息
+   * @description 获取单个用户
    * @router get /api/user/{id}
    * @request url baseRequest
    * @response 200 baseResponse 创建成功
@@ -90,7 +90,7 @@ class UserController extends Controller {
 
   /**
    * @summary 获取所有用户(分页/模糊)
-   * @description 获取用户信息
+   * @description 获取所有用户(分页/模糊)
    * @router get /api/user
    * @request query integer *currentPage eg:1 当前页
    * @request query integer *pageSize eg:10 单页数量
@@ -110,8 +110,8 @@ class UserController extends Controller {
 
   /**
    * @summary 删除所选用户
-   * @description 获取用户信息
-   * @router delete /api/user/{id}
+   * @description 删除所选用户
+   * @router delete /api/users/{id}
    * @request path string *id
    * @response 200 baseResponse 创建成功
    */
