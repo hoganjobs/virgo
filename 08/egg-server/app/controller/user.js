@@ -18,6 +18,10 @@ class UserController extends Controller {
    */
   async create() {
     const { ctx } = this;
+
+    // 校验参数
+    ctx.validate(ctx.rule.createUserRequest)
+
     // ctx.body = "user ctrl 888";
     const res = {abc: 123}
 
