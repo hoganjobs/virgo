@@ -16,7 +16,7 @@ module.exports = (appInfo) => {
   config.keys = appInfo.name + "_1618388211724_4544";
 
   // add your middleware config here
-  config.middleware = ['errorHandler'];
+  config.middleware = ["errorHandler"];
 
   config.swaggerdoc = {
     dirScanner: "./app/controller",
@@ -32,6 +32,16 @@ module.exports = (appInfo) => {
     // enableValidate: true,
     routerMap: true,
     enable: true,
+  };
+
+  config.mongoose = {
+    url: "mongodb://127.0.0.1:27017/egg_x",
+    options: {
+      // useMongoClient: true,
+      autoReconnect: true,
+      reconnectTries: Number.MAX_VALUE,
+      bufferMaxEntries: 0,
+    },
   };
 
   // add your user config here

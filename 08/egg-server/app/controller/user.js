@@ -23,7 +23,11 @@ class UserController extends Controller {
     ctx.validate(ctx.rule.createUserRequest)
 
     // ctx.body = "user ctrl 888";
-    const res = {abc: 123}
+    // const res = {abc: 123}
+    const payload = ctx.request.body || {}
+
+    // 调用Service
+    const res = await this.service.user.create(payload)
 
     // 设置响应内容
     ctx.helper.success({ctx,res})
