@@ -26,9 +26,18 @@ const decorate = (
   options: RouteOptions = {},
   router: KoaRouter
 ) => {
-  return (target, property: string) => {
+  return (target, property) => {
+    // 添加中间件数组
+    const middlewares = []
+
+    if(options.middlewares) {
+      middlewares.push(...options.middlewares)
+    }
+
+    middlewares.push(target[property])
+
     const url = options.prefix ? options.prefix + path : path;
-    router[method](url, target[property]);
+    router[method](url, ...middlewares);
   };
 };
 
