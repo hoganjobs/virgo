@@ -1,7 +1,17 @@
 import * as Koa from "koa";
-import { get, post } from "../utils/decors";
+import { get, post, middlewares } from "../utils/decors";
 
 const users = [{ name: "tom" }];
+
+@middlewares([
+  async function validation(ctx: Koa.Context, next: () => Promise<any>) {
+    if(ctx.header.token) {
+      await next()
+    } else {
+      throw '请登录'
+    }
+  },
+])
 export default class User {
   @get("/users")
   public list(ctx: Koa.Context) {

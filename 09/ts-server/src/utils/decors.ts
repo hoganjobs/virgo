@@ -27,17 +27,30 @@ const decorate = (
   router: KoaRouter
 ) => {
   return (target, property) => {
-    // 添加中间件数组
-    const middlewares = []
+    // 晚一拍执行
+    process.nextTick(() => {
+      const middlewares = [];
+      if (target.middlewares) {
+        middlewares.push(...target.middlewares);
+      }
 
-    if(options.middlewares) {
-      middlewares.push(...options.middlewares)
-    }
+      // 添加中间件数组
 
-    middlewares.push(target[property])
+      if (options.middlewares) {
+        middlewares.push(...options.middlewares);
+      }
 
-    const url = options.prefix ? options.prefix + path : path;
-    router[method](url, ...middlewares);
+      middlewares.push(target[property]);
+
+      const url = options.prefix ? options.prefix + path : path;
+      router[method](url, ...middlewares);
+    });
+  };
+};
+
+export const middlewares = function middlewares(middlewares: Koa.Middleware[]) {
+  return function (target) {
+    target.prototype.middlewares = middlewares;
   };
 };
 
