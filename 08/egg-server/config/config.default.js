@@ -44,6 +44,12 @@ module.exports = (appInfo) => {
     },
   };
 
+  config.jwt = {
+    secret: "Great4-M",
+    enable: true, // default is false
+    match: /^\/api/, // optional
+  };
+
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
