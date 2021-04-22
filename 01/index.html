@@ -19,7 +19,7 @@
 <body>
     <div id="app">
         <cube-button @click='getTokens'>getTokens</cube-button>
-        <!-- <cube-button @click='getFollowers'>getFollowers</cube-button> -->
+        <cube-button @click='getFollowers'>getFollowers</cube-button>
     </div>
     <script>
         var app = new Vue({
@@ -33,10 +33,10 @@
                     const res = await axios.get('/getTokens')
                     console.log('res:',res)
                 },
-                // async getFollowers(){
-                //     const res = await axios.get('/getFollowers')
-                //     console.log('res',res)
-                // }
+                async getFollowers(){
+                    const res = await axios.get('/getFollowers')
+                    console.log('res',res)
+                }
             },
             mounted: function () {
 

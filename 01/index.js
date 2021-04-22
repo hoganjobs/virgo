@@ -35,6 +35,13 @@ router.get('/getTokens',async ctx => {
     ctx.body = res.data
 })
 
+router.get('/getFollowers', async ctx => {
+  const url = `https://api.weixin.qq.com/cgi-bin/user/get?access_token=${tokenCache.access_token}`
+  const res = await axios.get(url)
+  console.log('getFollowers:',res)
+  ctx.body = res.data
+})
+
 
 
 
