@@ -34,6 +34,6 @@ interface ILive {
 const URL = "http://restapi.amap.com/v3/weather/weatherInfo"
 const KEY = "4b6a1834397ade9cc36d9d8618992fce"
 
-axios.get(`${URL}?city=${encodeURI(command.city)}&key=${KEY}`).then(res => {
+axios.get(`${URL}?city=${encodeURI('')}&key=${KEY}`).then(res => {
   console.log(res.data)
 })
