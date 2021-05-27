@@ -1,3 +1,3 @@
-# Getting Started with Nodejs
+# Getting Started with virgo
 
-## nodejs
+## Virgo
