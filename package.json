@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/hoganjobs/virgo#readme",
   "dependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/parser": "^7.14.3",
+    "@babel/preset-env": "^7.14.2",
+    "@babel/traverse": "^7.14.2",
     "cheerio": "^1.0.0-rc.5",
     "co-redis": "^2.1.1",
     "egg-init": "^2.2.0",
@@ -43,5 +47,6 @@
   },
   "devDependencies": {
     "http-proxy-middleware": "^1.1.0"
-  }
+  },
+  "keywords": []
 }
